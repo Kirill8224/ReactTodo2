@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { TodoList } from './TodoList'
+import { GetTasks } from '../dal/api'
 import { TodoDetail } from './TodoDeatil'
 import './App.css'
 
 function App() {
-  const [Tasks, setTask]= useState(null)
+  const [Tasks, setTask]= useState<TasksType[] | null>(null)
+  type TasksType = {
+    completed: boolean,
+    id: number,
+    title: string,
+    userId: number
+  }
+  
   useEffect(()=> {
-    const data = fetch('https://corsproxy.io/?https://jsonplaceholder.typicode.com/todos')
-    .then((res) => {return res.json()})
-    .then((final)=> {return setTask(final)})
+    GetTasks().then((final)=> {return setTask(final)})
 }, [])
-  const [selectTask, setselectTask] = useState(null)
+  const [selectTask, setselectTask] = useState<number | null>(null)
   if(Tasks == null){
     return(<h2>загрузка</h2>
     )}
@@ -21,14 +27,11 @@ function App() {
   }
   return (
     <>
-    
       {console.log(Tasks)}
-      <div>
       <button onClick={()=> {setselectTask(null)}}>сбросить выделения</button>
       <TodoDetail Tasks= {Tasks} selectTask= {selectTask} setselectTask= {setselectTask} />
       <TodoList Tasks= {Tasks} selectTask= {selectTask} setselectTask= {setselectTask}/>
-      
-      </div>
+    
     </>
   )
 }

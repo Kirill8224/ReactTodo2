@@ -6,7 +6,9 @@
     "module": "esnext",
     "types": ["vite/client"],
     "skipLibCheck": true,
-
+    "noImplicitReturns": true,
+    "strict": true,
+    "noImplicitAny": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
