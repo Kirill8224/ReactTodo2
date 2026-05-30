@@ -1,15 +1,6 @@
 import { TodoItem } from "./TodoItem"
 //const tracks= [{id: 1}, {id: 2}, {id:3}]
-type DetailTaskType= {
-    selectTask: number | null,
-    Tasks: {
-        completed: boolean,
-        id: number,
-        title: string,
-        userId: number
-    }[] | null,
-    setselectTask: React.Dispatch<React.SetStateAction<number | null>>
-  }
+import type { DetailTaskType } from "../bll/useTask"
 export function TodoList({selectTask, Tasks, setselectTask}: DetailTaskType){
     return(Tasks?.map((task)=> {
         return(<div style={{gap: '5px', padding: '5px'}}>
